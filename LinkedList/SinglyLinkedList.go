@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 )
 
 type SinglyLinkedList struct {
@@ -56,13 +55,11 @@ func (s *SinglyLinkedList) AddBack(n *SinglyNode) {
 }
 
 func (s *SinglyLinkedList) AddAt(n *SinglyNode, idx int) {
-	if idx > s.length-1 {
-		log.Println("cannot insert at this index!!")
-		return
-	}
-
 	if idx == 0 {
 		s.AddFront(n)
+		return
+	} else if idx > s.length {
+		s.AddBack(n)
 		return
 	} else {
 		node := s.head

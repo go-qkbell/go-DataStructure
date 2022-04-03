@@ -1,7 +1,5 @@
 package main
 
-import "log"
-
 type DoublyLinkedList struct {
 	head   *DoublyNode
 	tail   *DoublyNode
@@ -57,13 +55,11 @@ func (s *DoublyLinkedList) AddBack(n *DoublyNode) {
 }
 
 func (s *DoublyLinkedList) AddAt(n *DoublyNode, idx int) {
-	if idx > s.length-1 {
-		log.Println("cannot insert at this index!!")
-		return
-	}
-
 	if idx == 0 {
 		s.AddFront(n)
+		return
+	} else if idx > s.length {
+		s.AddBack(n)
 		return
 	} else {
 		node := s.head

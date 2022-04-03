@@ -23,19 +23,19 @@ func TestNewSinglyList(t *testing.T) {
 	list.AddFront(n7)
 	list.AddBack(n4)
 	list.AddAt(n8, 2)
-	list.AddAt(n9, 6)
+	list.AddAt(n9, 10)
 	list.AddBack(n5)
 	list.AddFront(n0)
 
-	guess := []int{0, 7, 6, 8, 1, 2, 3, 9, 4, 5}
+	guess := []int{0, 7, 6, 8, 1, 2, 3, 4, 9, 5}
 	count := 0
 
 	for node := list.head; node != nil; {
 		if node.value != guess[count] {
-			t.Fatal("failed")
+			t.Fatalf("node: %d, expected: %d failed", node.value, guess[count])
 		}
 
-		t.Logf("node: %d, expected: %d", node.value, guess[count])
+		t.Logf("node: %d, expected: %d success", node.value, guess[count])
 		node = node.next
 		count++
 	}
@@ -62,11 +62,11 @@ func TestNewDoublyList(t *testing.T) {
 	list.AddFront(n7)
 	list.AddBack(n4)
 	list.AddAt(n8, 2)
-	list.AddAt(n9, 6)
+	list.AddAt(n9, 10)
 	list.AddBack(n5)
 	list.AddFront(n0)
 
-	guess := []int{0, 7, 6, 8, 1, 2, 3, 9, 4, 5}
+	guess := []int{0, 7, 6, 8, 1, 2, 3, 4, 9, 5}
 	count := 0
 
 	for node := list.head; node != nil; {
