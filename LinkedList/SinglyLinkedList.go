@@ -1,6 +1,9 @@
-package LinkedList
+package main
 
-import "log"
+import (
+	"fmt"
+	"log"
+)
 
 type SinglyLinkedList struct {
 	head   *SinglyNode
@@ -52,26 +55,22 @@ func (s *SinglyLinkedList) AddBack(n *SinglyNode) {
 	s.length++
 }
 
-func (s *SinglyLinkedList) AddAfter(n *SinglyNode, idx int) {
+func (s *SinglyLinkedList) AddAt(n *SinglyNode, idx int) {
 	if idx > s.length-1 {
 		log.Println("cannot insert at this index!!")
 		return
 	}
 
-	if s.head == nil {
-		s.head = n
-		s.tail = n
+	if idx == 0 {
+		s.AddFront(n)
+		return
 	} else {
 		node := s.head
-		for i := 0; i < idx; i++ {
+		for i := 0; i < idx-1; i++ {
 			node = node.next
 		}
 		n.next = node.next
 		node.next = n
-
-		if node == s.tail {
-			s.tail = n
-		}
 	}
 
 	s.length++
@@ -80,7 +79,8 @@ func (s *SinglyLinkedList) AddAfter(n *SinglyNode, idx int) {
 func (s *SinglyLinkedList) RemoveFront() {
 	if s.head == nil {
 		return
-	} else if s.head == s.tail {
+	}
+	if s.head == s.tail {
 		s.head = nil
 		s.tail = nil
 	} else {
@@ -93,7 +93,8 @@ func (s *SinglyLinkedList) RemoveFront() {
 func (s *SinglyLinkedList) RemoveBack() {
 	if s.tail == nil {
 		return
-	} else if s.head == s.tail {
+	}
+	if s.head == s.tail {
 		s.head = nil
 		s.tail = nil
 	} else {
@@ -107,4 +108,52 @@ func (s *SinglyLinkedList) RemoveBack() {
 	}
 
 	s.length--
+}
+
+func (s *SinglyLinkedList) RemoveNode(n *SinglyNode) {
+	if s.head == n {
+		s.head = s.head.next
+		s.length--
+		return
+	}
+
+	for pn := s.head; pn != nil; {
+		if pn.next == n {
+			pn.next = n.next
+
+			if n == s.tail {
+				s.tail = pn
+			}
+
+			break
+		}
+
+		pn = pn.next
+	}
+
+	s.length--
+}
+
+func (s *SinglyLinkedList) Search(idx int) *SinglyNode {
+	if s.head == nil {
+		return nil
+	}
+	if idx > s.length-1 {
+		return nil
+	}
+
+	var node *SinglyNode
+
+	for i := 0; i < idx; i++ {
+		node = node.next
+	}
+
+	return node
+}
+
+func (s *SinglyLinkedList) Print() {
+	for node := s.head; node != nil; {
+		fmt.Printf("%d -> ", node.value)
+		node = node.next
+	}
 }
