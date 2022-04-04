@@ -1,4 +1,4 @@
-package main
+package linkedlist
 
 type DoublyLinkedList struct {
 	head   *DoublyNode
