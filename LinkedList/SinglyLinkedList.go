@@ -131,24 +131,7 @@ func (s *SinglyLinkedList) RemoveNode(n *SinglyNode) {
 	s.length--
 }
 
-func (s *SinglyLinkedList) Search(idx int) *SinglyNode {
-	if s.head == nil {
-		return nil
-	}
-	if idx > s.length-1 {
-		return nil
-	}
-
-	var node *SinglyNode
-
-	for i := 0; i < idx; i++ {
-		node = node.next
-	}
-
-	return node
-}
-
-func (s *SinglyLinkedList) Print() {
+func (s *SinglyLinkedList) Traverse() {
 	for node := s.head; node != nil; {
 		fmt.Printf("%d -> ", node.value)
 		node = node.next

@@ -1,5 +1,7 @@
 package linkedlist
 
+import "fmt"
+
 type DoublyLinkedList struct {
 	head   *DoublyNode
 	tail   *DoublyNode
@@ -124,19 +126,16 @@ func (s *DoublyLinkedList) RemoveNode(n *DoublyNode) {
 	s.length--
 }
 
-func (s *DoublyLinkedList) Search(idx int) *DoublyNode {
-	if s.head == nil {
-		return nil
-	}
-	if idx > s.length-1 {
-		return nil
-	}
-
-	var node *DoublyNode
-
-	for i := 0; i < idx; i++ {
+func (s *DoublyLinkedList) Traverse() {
+	for node := s.head; node != nil; {
+		fmt.Printf("%d -> ", node.value)
 		node = node.next
 	}
+}
 
-	return node
+func (s *DoublyLinkedList) TraverseBack() {
+	for node := s.tail; node != nil; {
+		fmt.Printf("%d -> ", node.value)
+		node = node.prev
+	}
 }
