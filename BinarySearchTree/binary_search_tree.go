@@ -35,3 +35,33 @@ func (n *Node) Search(key int) bool {
 
 	return true
 }
+
+func (n *Node) InOrder(list *[]int) *[]int {
+	if n != nil {
+		n.left.InOrder(list)
+		*list = append(*list, n.key)
+		n.right.InOrder(list)
+	}
+
+	return list
+}
+
+func (n *Node) PreOrder(list *[]int) *[]int {
+	if n != nil {
+		*list = append(*list, n.key)
+		n.left.PreOrder(list)
+		n.right.PreOrder(list)
+	}
+
+	return list
+}
+
+func (n *Node) PostOrder(list *[]int) *[]int {
+	if n != nil {
+		n.left.PostOrder(list)
+		n.right.PostOrder(list)
+		*list = append(*list, n.key)
+	}
+
+	return list
+}
