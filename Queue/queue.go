@@ -26,15 +26,15 @@ func (q *Queue) Push(n int) error {
 	}
 
 	if q.front == -1 && q.rear == -1 {
-		q.val[0] = n
+		q.val = append(q.val, n)
 		q.front = 0
 		q.rear = 0
 
 		return nil
 	}
 
+	q.val = append(q.val, n)
 	q.rear++
-	q.val[q.rear] = n
 
 	return nil
 
@@ -46,15 +46,16 @@ func (q *Queue) DeleteFront() (int, error) {
 	}
 
 	if q.front == q.rear {
-		temp := q.val[q.front]
+		temp := q.val[0]
 		q.val = q.val[:0]
+		q.front, q.rear = -1, -1
 
 		return temp, nil
 	}
 
-	temp := q.val[q.front]
+	temp := q.val[0]
+	q.val = q.val[1:]
 	q.front++
-	q.val = q.val[q.front:]
 
 	return temp, nil
 }
